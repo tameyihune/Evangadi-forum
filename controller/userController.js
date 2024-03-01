@@ -5,7 +5,7 @@ const jwt=require('jsonwebtoken')
 async function register(req,res) {
 const {username,firstname,lastname,email,password}=req.body
     if(!username||!firstname||!lastname||!email||!password){
-      return res.status(StatusCode.Bad_request).json("please provide all the information")
+      return res.status(400).json({msg:"please provide all the information fill"})
     }
     try {
       const [user]= await db.query("select username,userid from users where username=?or email=?",[username,email])
@@ -44,7 +44,7 @@ async function login(req,res) {
   const username=user[0].username
   const userid=user[0].userid
   const token= jwt.sign({username,userid},process.env.jwt_key, {expiresIn:"1d"})
-  return res.json({msg:"user login successfully",token})
+  return res.json({msg:"user login successfully",token,username})
   
   
   return res.json({user})

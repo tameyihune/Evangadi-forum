@@ -8,13 +8,12 @@ const db = mysql2.createPool({
     database: process.env.DATABASE,
     connectionLimit:10
 }); 
-console.log(process.env.PASSWORD)
 // Connect to MySQL
-// db.execute("select 'test'",(err,result) => {
-//     if (err) {
-//         console.log(err.message);
-//     } else {
-//         console.log(result);
-//     }
-// });
+db.execute("select 'test'",(err,result) => {
+    if (err) {
+        console.log(err.message);
+    } else {
+        console.log(result);
+    }
+});
 module.exports=db.promise();
